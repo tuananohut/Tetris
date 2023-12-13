@@ -4,7 +4,7 @@ This is tetris clone in C++. I used SFML to draw tetrominos and the other things
 
 ## How you can play?
 
-You must download x64 folder. Open Debug folder and run Tetris.exe file. 
+You need Visual Studio 2022 to play. 
 
 Movement of tetromino: arrow keys
 
