@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Grid.h"
 #include "Colors.h"
+#include "Game.h"
 
 Grid::Grid()
 {
@@ -32,7 +33,7 @@ void Grid::draw(sf::RenderWindow& window)
 			int cellValue = grid[row][column];
 			sf::RectangleShape rectangle(sf::Vector2f(cellSize - 1.f, cellSize - 1.f));
 			rectangle.setFillColor(m_Colors[cellValue]);
-			rectangle.setPosition((rectangle.getPosition().x + column) * 30 + 1, (rectangle.getPosition().y + row) * 30 + 1);
+			rectangle.setPosition((rectangle.getPosition().x + column) * 30 + 11, (rectangle.getPosition().y + row) * 30 + 11);
 			window.draw(rectangle);
 		}
 	}

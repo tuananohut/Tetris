@@ -10,6 +10,8 @@ Game::Game()
 	this->m_NextTetromino = getRandomTetromino();
 
 	this->isGameOver = false;
+
+	score = 0;
 }
 
 Tetromino Game::getRandomTetromino()
@@ -36,7 +38,22 @@ std::vector<Tetromino> Game::getTetrominos()
 void Game::draw(sf::RenderWindow& window)
 {
 	this->grid.draw(window);
-	this->m_CurrentTetromino.draw(window);
+	this->m_CurrentTetromino.draw(window, 11, 11);
+
+	switch(this->m_NextTetromino.id)
+	{
+	case 3:
+		this->m_NextTetromino.draw(window, 255, 290);
+		break;
+		
+	case 4:
+		this->m_NextTetromino.draw(window, 285, 280);
+		break;
+
+	default:
+		this->m_NextTetromino.draw(window, 270, 270);
+		break;
+	}
 }
 
 void Game::userInput(sf::RenderWindow& window)
@@ -84,6 +101,7 @@ void Game::reset()
 	this->m_Tetrominos = getTetrominos();
 	this->m_CurrentTetromino = getRandomTetromino();
 	this->m_NextTetromino = getRandomTetromino();
+	score = 0;
 }
 
 
@@ -119,7 +137,7 @@ void Game::m_LockTetromino()
 {
 	std::vector<Position> tiles = this->m_CurrentTetromino.getCellPosition();
 
-	for(auto item: tiles)
+	for(auto& item: tiles)
 	{
 		this->grid.grid[item.row][item.column] = this->m_CurrentTetromino.id;
 	}
@@ -132,7 +150,9 @@ void Game::m_LockTetromino()
 	else
 	{
 		this->m_NextTetromino = getRandomTetromino();
-		grid.clearFullRows();
+		int rowsCleared = grid.clearFullRows();
+		m_UpdateScore(0, 1);
+		m_UpdateScore(rowsCleared, 0);
 	}
 }
 
@@ -149,7 +169,7 @@ bool Game::m_IsTetrominoOut()
 {
 	std::vector<Position> tiles = this->m_CurrentTetromino.getCellPosition();
 
-	for(auto item: tiles)
+	for(auto& item: tiles)
 	{
 		if(this->grid.isCellOut(item.row, item.column))
 		{
@@ -164,7 +184,7 @@ bool Game::m_IsTetrominoFit()
 {
 	std::vector<Position> tiles = this->m_CurrentTetromino.getCellPosition();
 
-	for(auto item: tiles)
+	for(auto& item: tiles)
 	{
 		if(grid.isCellEmpty(item.row, item.column) == false)
 		{
@@ -173,4 +193,27 @@ bool Game::m_IsTetrominoFit()
 	}
 	
 	return true;
+}
+
+void Game::m_UpdateScore(int linesCleared, int moveDownPoints)
+{
+	switch(linesCleared)
+	{
+	case 1:
+		score += 100;
+		break;
+
+	case 2:
+		score += 300;
+		break;
+
+	case 3:
+		score += 500;
+		break;
+
+	default:
+		break;
+	}
+
+	score += moveDownPoints;
 }

@@ -9,7 +9,7 @@ class Tetromino
 public:
 	Tetromino();
 	
-	void draw(sf::RenderWindow& window);
+	void draw(sf::RenderWindow& window, int offsetX, int offsetY);
 
 	void move(int rows, int columns);
 	void rotate();

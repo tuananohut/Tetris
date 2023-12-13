@@ -9,14 +9,14 @@ Tetromino::Tetromino()
 	this->m_ColumnOffset = 0;
 }
 
-void Tetromino::draw(sf::RenderWindow& window)
+void Tetromino::draw(sf::RenderWindow& window, int offsetX, int offsetY)
 {
 	std::vector<Position> tiles = getCellPosition();
 
 	for(Position item: tiles)
 	{
 		sf::RectangleShape tetromino(sf::Vector2f(m_CellSize - 1.f, m_CellSize - 1.f));
-		tetromino.setPosition(item.column * m_CellSize + 1.f, item.row * m_CellSize + 1.0f);
+		tetromino.setPosition(item.column * m_CellSize + offsetX, item.row * m_CellSize + offsetY);
 		tetromino.setFillColor(m_Colors[id]);
 		window.draw(tetromino);
 	}

@@ -22,6 +22,8 @@ public:
 	void reset();
 	bool isGameOver;
 
+	int score;
+
 private:
 	std::vector<Tetromino> m_Tetrominos;
 
@@ -35,4 +37,6 @@ private:
 	
 	bool m_IsTetrominoFit();
 	bool m_IsTetrominoOut();
+
+	void m_UpdateScore(int linesCleared, int moveDownPoints);
 };
