@@ -1,5 +1,19 @@
 # Tetris
 
+## How you can play?
+
+You must download x64 folder. Open Debug folder and run Tetris.exe file. 
+
+Movement of tetromino: arrow keys
+
+Rotation: space
+
+Restrart: R
+
+### How it looks like?
+
+https://youtu.be/BikR5HZnKiw
+
 ### Useful Links
 
 https://tetris.fandom.com/wiki/SRS
